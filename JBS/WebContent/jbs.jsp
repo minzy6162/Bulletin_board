@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/custum.css">
 <title>jsp 게시판</title>
 </head>
 <body>
@@ -89,7 +90,7 @@
 					%>
 					<tr>
 						<td><%= list.get(i).getJbsID() %></td>
-						<td><a href="view.jsp?jbsID=<%=list.get(i).getJbsID()%>"><%= list.get(i).getJbsTitle() %></a></td>
+						<td><a href="view.jsp?jbsID=<%=list.get(i).getJbsID()%>"><%= list.get(i).getJbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>") %></a></td>
 						<td><%= list.get(i).getUserID() %></td>
 						<td><%= list.get(i).getJbsDate().substring(0, 11) + 
 						list.get(i).getJbsDate().substring(14, 16)+"시" +

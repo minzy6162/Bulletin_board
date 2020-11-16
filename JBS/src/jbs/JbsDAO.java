@@ -14,7 +14,7 @@ public class JbsDAO {
 		try {
 			String dbURL = "jdbc:mysql://localhost:3306/JBS?serverTimezone=UTC";
 			String dbID = "root";
-			String dbPassword = "mirim";
+			String dbPassword = "6162";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL,dbID,dbPassword);
 			
@@ -131,5 +131,29 @@ public class JbsDAO {
 			}			
 			return null;
 		}
+		public int update(int jbsID, String jbsTitle, String jbsContent) {
+			String SQL = "UPDATE JBS SET jbsTitle = ?, jbsContent=? WHERE jbsID=?";
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, jbsTitle);
+				pstmt.setString(2, jbsContent);
+				pstmt.setInt(3, jbsID);
+				return pstmt.executeUpdate();				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;//데이터베이스 오류 
+		}
 
+		public int delete(int jbsID) {
+			String SQL = "UPDATE JBS SET jbsAvailable=0 WHERE jbsID=?";
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, jbsID);
+				return pstmt.executeUpdate();				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;//데이터베이스 오류 
+		}
 }
